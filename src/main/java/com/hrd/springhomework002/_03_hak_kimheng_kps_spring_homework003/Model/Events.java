@@ -1,0 +1,20 @@
+package com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Events {
+    private Integer eventId;
+    private String eventName;
+    private Date eventDate;
+    private Venue venue;
+    private List<Attendee> attendeeList;
+}
+
