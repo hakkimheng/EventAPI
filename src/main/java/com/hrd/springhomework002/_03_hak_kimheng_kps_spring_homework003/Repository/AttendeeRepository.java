@@ -10,7 +10,7 @@ import java.util.List;
 public interface AttendeeRepository {
 
     @Select("""
-       SELECT * FROM attendee
+       SELECT * FROM events attendee
        offset #{limit} * (#{page} -1)
        limit #{limit}
        """
