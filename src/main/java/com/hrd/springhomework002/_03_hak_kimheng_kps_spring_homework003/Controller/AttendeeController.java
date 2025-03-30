@@ -4,6 +4,7 @@ import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Model.At
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Model.DTO.Request.AttendeeRequest;
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Model.DTO.Response.ApiResponse;
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Service.AttendeeService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ public class AttendeeController {
     }
     // get all attendees
     @GetMapping
+    @Operation(summary = "Get all Attendees")
     public ResponseEntity<ApiResponse<List<Attendee>>> getAllAttendees (@RequestParam(defaultValue = "1") Integer page,
                                                                         @RequestParam(defaultValue = "10") Integer limit){
 
@@ -39,6 +41,7 @@ public class AttendeeController {
 
     // get attendee by id
     @GetMapping("/{id}")
+    @Operation(summary = "Get Attendee by Id")
     public ResponseEntity<ApiResponse<Attendee>> getAttendeeById(@PathVariable Integer id){
         Attendee attendee = attendeeService.getAttendeeById(id);
         ApiResponse<Attendee> response = ApiResponse.<Attendee>builder()
@@ -52,6 +55,7 @@ public class AttendeeController {
 
     // post attendee
     @PostMapping
+    @Operation(summary = "Create Attendee")
     public ResponseEntity<ApiResponse<Attendee>> createAttendee(@RequestBody @Valid AttendeeRequest attendeeRequest){
         Attendee attendee = attendeeService.createAttendee(attendeeRequest);
         ApiResponse<Attendee> response = ApiResponse.<Attendee>builder()
@@ -66,6 +70,7 @@ public class AttendeeController {
 
     // update attendee
     @PutMapping("/{id}")
+    @Operation(summary = "Update Attendee")
     public ResponseEntity<ApiResponse<Attendee>> updateAttendee(@RequestBody @Valid AttendeeRequest attendeeRequest,
                                                                 @PathVariable Integer id){
         Attendee attendee = attendeeService.updateAttendee(attendeeRequest,id);
@@ -81,7 +86,8 @@ public class AttendeeController {
 
     // delete attendee
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<Attendee>> delelteAttendee(@PathVariable Integer id){
+    @Operation(summary = "Delete Attendee")
+    public ResponseEntity<ApiResponse<Attendee>> deleteAttendee(@PathVariable Integer id){
         attendeeService.deleteAttendee(id);
         ApiResponse<Attendee> response = ApiResponse.<Attendee>builder()
                 .message("The attendee has been successfully updated.")

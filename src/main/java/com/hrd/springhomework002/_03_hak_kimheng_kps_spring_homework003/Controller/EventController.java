@@ -4,6 +4,7 @@ import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Model.DT
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Model.DTO.Response.ApiResponse;
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Model.Events;
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Service.EventService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class EventController {
     }
     //get all events
     @GetMapping
+    @Operation(summary = "Get all Events")
     public ResponseEntity<ApiResponse<List<Events>>> getAllEvents(@RequestParam(defaultValue = "1") Integer page , @RequestParam(defaultValue = "10") Integer limit){
         List<Events> events = eventService.getAllEvents(page , limit);
         ApiResponse<List<Events>> response = ApiResponse.<List<Events>>builder()
@@ -37,6 +39,7 @@ public class EventController {
 
     // get event by id
     @GetMapping("/{id}")
+    @Operation(summary = "Get Event by ID")
     public ResponseEntity<ApiResponse<Events>> getEventById(@PathVariable Integer id){
         Events event = eventService.getEventById(id);
         ApiResponse<Events> response  = ApiResponse.<Events>builder()
@@ -51,6 +54,7 @@ public class EventController {
 
     // create event
     @PostMapping
+    @Operation(summary = "Create Event")
     public ResponseEntity<ApiResponse<Events>> createEvent(@RequestBody @Valid EventRequest eventRequest){
         Events event = eventService.createEvent(eventRequest);
         ApiResponse<Events> response = ApiResponse.<Events>builder()
@@ -66,6 +70,7 @@ public class EventController {
 
     // update event
     @PutMapping("/{id}")
+    @Operation(summary = "Update Event")
     public ResponseEntity<ApiResponse<Events>> updateEventById( @PathVariable Integer id, @RequestBody EventRequest eventRequest){
         Events events = eventService.updateEventById(id,eventRequest);
         ApiResponse<Events> response = ApiResponse.<Events>builder()
@@ -80,6 +85,7 @@ public class EventController {
 
     // delete events
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Event")
     public ResponseEntity<ApiResponse<Events>> deleteEventById(@PathVariable Integer id){
         eventService.deleteEventById(id);
         ApiResponse<Events> response = ApiResponse.<Events>builder()

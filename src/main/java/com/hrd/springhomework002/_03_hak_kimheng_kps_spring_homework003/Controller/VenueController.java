@@ -5,6 +5,7 @@ import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Model.DT
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Model.Venue;
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework003.Service.VenueService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.apache.ibatis.annotations.Select;
@@ -29,6 +30,7 @@ public class VenueController {
 
     // get all venue
     @GetMapping
+    @Operation(summary = "Get all venues")
     public ResponseEntity<ApiResponse<List<Venue>>> getAllVenue(@RequestParam(defaultValue = "1")  Integer page ,
                                                                 @RequestParam(defaultValue = "10") Integer limit) {
         List<Venue> venue = venueService.getAllVenue(page, limit);
@@ -44,6 +46,7 @@ public class VenueController {
 
     // get venue by id
     @GetMapping("/{id}")
+    @Operation(summary = "Get venue by ID")
     public ResponseEntity<ApiResponse<Venue>> getVenueById(@PathVariable Integer id){
         Venue venue = venueService.getVenueById(id);
         ApiResponse<Venue> response = ApiResponse.<Venue>builder()
@@ -58,6 +61,7 @@ public class VenueController {
 
     // post venue
     @PostMapping
+    @Operation(summary = "Create Venue")
     public ResponseEntity<ApiResponse<Venue>> createVenue (@RequestBody @Valid VenueRequest venueRequest){
         Venue venue = venueService.createVenue(venueRequest);
         ApiResponse<Venue> response = ApiResponse.<Venue>builder()
@@ -72,6 +76,7 @@ public class VenueController {
 
     // update venue
     @PutMapping("/{id}")
+    @Operation(summary = "Update Venue")
     public ResponseEntity<ApiResponse<Venue>> updateVenue(@PathVariable Integer id,@RequestBody VenueRequest venueRequest){
         Venue venue = venueService.updateVenue(id, venueRequest);
         ApiResponse<Venue> response = ApiResponse.<Venue>builder()
@@ -86,6 +91,7 @@ public class VenueController {
 
     // delete venue
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Venue")
     public ResponseEntity<ApiResponse<Venue>> deleteVenue(@PathVariable Integer id){
         venueService.deleteVenue(id);
         ApiResponse<Venue> response = ApiResponse.<Venue>builder()
@@ -96,5 +102,4 @@ public class VenueController {
                 .build();
         return ResponseEntity.ok(response);
     }
-
 }
