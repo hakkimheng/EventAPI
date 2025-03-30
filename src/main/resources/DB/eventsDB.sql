@@ -32,9 +32,5 @@ CREATE TABLE events_attendee(
 
 );
 
-DROP TABLE events_attendee;
-DROP TABLE events;
-DROP TABLE attendee;
-DROP TABLE venue;
 
 
